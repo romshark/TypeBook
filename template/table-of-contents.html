@@ -1,0 +1,31 @@
+<div id="table-of-contents">
+	<b>Table of contents</b>
+	<ul>
+		<!-- Scalar Types -->
+		<li><a href="#scalar-types">Scalar Types ({{ .Registry.TotalScalarTypes }})</a></li>
+		<ul>
+			{{ range $typeName, $type := .Registry.PredefinedScalarTypes }}
+				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+			{{ end }}
+			{{ range $typeName, $type := .Doc.ScalarTypes }}
+				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+			{{ end }}
+		</ul>
+
+		<!-- Enumeration Types -->
+		<li><a href="#enumeration-types">Enumeration Types ({{ .Registry.TotalEnumerationTypes }})</a></li>
+		<ul>
+			{{ range $typeName, $type := .Doc.EnumerationTypes }}
+				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+			{{ end }}
+		</ul>
+
+		<!-- Composite Types -->
+		<li><a href="#composite-types">Composite Types ({{ .Registry.TotalCompositeTypes }})</a></li>
+		<ul>
+			{{ range $typeName, $type := .Doc.CompositeTypes }}
+				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+			{{ end }}
+		</ul>
+	</ul>
+</div>

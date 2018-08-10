@@ -1,0 +1,19 @@
+<div id="scalar-types">
+	<a name="scalar-types"></a>
+	<h2 class="section-heading">Scalar Types</h2>
+
+	{{ range $typeName, $type := .Registry.PredefinedScalarTypes }}
+		<div class="scalar-type">
+			<a name="{{ $typeName }}"></a>
+			<h3>{{ $typeName }}</h3>
+			<p class="description">{{ $type.Description }}</p>
+		</div>
+	{{ end }}
+	{{ range $typeName, $type := .Doc.ScalarTypes }}
+		<div class="scalar-type">
+			<a name="{{ $typeName }}"></a>
+			<h3>{{ $typeName }}</h3>
+			<p class="description">{{ $type.Description }}</p>
+		</div>
+	{{ end }}
+</div>

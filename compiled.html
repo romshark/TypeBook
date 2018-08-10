@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Movie Theater - 1.0.0</title>
+		<meta name="description" content="This document describes the schema of a movie theater type system consisting of scalar-, enumeration- and composite types as well as type relations.
+"/>
+		<meta name="author" content="Roman Sharkov" />
+		<meta name="date" content="2018-08-10T01:59:59Z">
+		<meta name="generator" content="TypeBook 0.1">
+		<style>
+			html {
+				width: 100%;
+				min-height: 100%;
+				background-color: #eee;
+			}
+			body {
+				width: 768px;
+				height: 100%;
+				margin: auto;
+				background-color: #fff;
+				padding: 64px;
+				font-family: sans-serif;
+			}
+
+			a {
+				color: #2196f3;
+				text-decoration: none;
+				transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+				text-shadow:
+					0px -2px 0 inherit, 0px -1px 0 inherit, 0px 0px 0 inherit,
+					2px -2px 0 inherit, 2px -1px 0 inherit, 2px 0px 0 inherit,
+					-2px -2px 0 inherit, -2px -1px 0 inherit, -2px 0px 0 inherit,
+					1px -2px 0 inherit, 1px -1px 0 inherit, 1px 0px 0 inherit,
+					-1px -2px 0 inherit, -1px -1px 0 inherit, -1px 0px 0 inherit,
+					0px -2px 0 inherit, 0px -1px 0 inherit, 0px 0px 0 inherit;
+				box-shadow:
+					0 -1px 0 0 inherit inset,
+					0 -2px 0 0 transparent inset;
+			}
+
+			a:hover {
+				box-shadow:
+					0 -1px 0 0 inherit inset,
+					0 -2px 0 0 #2196f3 inset;
+			}
+
+			a::selection {
+				color: inherit;
+				background: #2196f3;
+				text-shadow: none;
+			}
+
+			#table-of-contents {
+				margin-top: 4rem;
+				margin-bottom: 4rem;
+			}
+			#table-of-contents li {
+				padding: .2rem;
+			}
+
+			.section-heading {
+				border-bottom: 1px solid #eee;
+				padding-bottom: .5rem;
+			}
+
+			.compositeType-field-listType {
+				color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Document Header -->
+		<div id="header">
+			<h1>Movie Theater</h1>
+			<table>
+				<tbody>
+					<tr>
+						<td>Author</td>
+						<td>Roman Sharkov</td>
+					</tr>
+					<tr>
+						<td>Version:</td>
+						<td>1.0.0</td>
+					</tr>
+					<tr>
+						<td>Build:</td>
+						<td>2018-08-10T01:59:59Z</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Table of Contents -->
+		<div id="table-of-contents">
+	<b>Table of contents</b>
+	<ul>
+		<!-- Scalar Types -->
+		<li><a href="#scalar-types">Scalar Types (7)</a></li>
+		<ul>
+			
+				<li><a href="#Bool">Bool</a></li>
+			
+				<li><a href="#Number">Number</a></li>
+			
+				<li><a href="#String">String</a></li>
+			
+			
+				<li><a href="#Duration">Duration</a></li>
+			
+				<li><a href="#EmailAddress">EmailAddress</a></li>
+			
+				<li><a href="#Identifier">Identifier</a></li>
+			
+				<li><a href="#Time">Time</a></li>
+			
+		</ul>
+
+		<!-- Enumeration Types -->
+		<li><a href="#enumeration-types">Enumeration Types (2)</a></li>
+		<ul>
+			
+				<li><a href="#Gender">Gender</a></li>
+			
+				<li><a href="#Genre">Genre</a></li>
+			
+		</ul>
+
+		<!-- Composite Types -->
+		<li><a href="#composite-types">Composite Types (2)</a></li>
+		<ul>
+			
+				<li><a href="#Actor">Actor</a></li>
+			
+				<li><a href="#Movie">Movie</a></li>
+			
+		</ul>
+	</ul>
+</div>
+
+
+		<!-- Scalar Types -->
+		<div id="scalar-types">
+	<a name="scalar-types"></a>
+	<h2 class="section-heading">Scalar Types</h2>
+
+	
+		<div class="scalar-type">
+			<a name="Bool"></a>
+			<h3>Bool</h3>
+			<p class="description">Boolean value that's either true or false</p>
+		</div>
+	
+		<div class="scalar-type">
+			<a name="Number"></a>
+			<h3>Number</h3>
+			<p class="description">A signed floating point number</p>
+		</div>
+	
+		<div class="scalar-type">
+			<a name="String"></a>
+			<h3>String</h3>
+			<p class="description">A UTF8 encoded text value</p>
+		</div>
+	
+	
+		<div class="scalar-type">
+			<a name="Duration"></a>
+			<h3>Duration</h3>
+			<p class="description">Represents a time span in seconds</p>
+		</div>
+	
+		<div class="scalar-type">
+			<a name="EmailAddress"></a>
+			<h3>EmailAddress</h3>
+			<p class="description">Represents an email address according to the `^.+@.+\..+$` pattern.
+</p>
+		</div>
+	
+		<div class="scalar-type">
+			<a name="Identifier"></a>
+			<h3>Identifier</h3>
+			<p class="description"></p>
+		</div>
+	
+		<div class="scalar-type">
+			<a name="Time"></a>
+			<h3>Time</h3>
+			<p class="description">Represents an RFC3339 encoded UTC datetime</p>
+		</div>
+	
+</div>
+
+
+		<!-- Enumeration Types -->
+		<div id="enumeration-types">
+	<a name="enumeration-types"></a>
+	<h2 class="section-heading">Enumeration Types</h2>
+
+	
+		<div class="enumeration-type">
+			<a name="Gender"></a>
+			<h3>Gender</h3>
+			<p class="description">Represents a gender enumration type
+</p>
+		</div>
+	
+		<div class="enumeration-type">
+			<a name="Genre"></a>
+			<h3>Genre</h3>
+			<p class="description"></p>
+		</div>
+	
+</div>
+
+
+		<!-- Composite Types -->
+		<div id="composite-types">
+	<a name="composite-types"></a>
+	<h2 class="section-heading">Composite Types</h2>
+
+	
+		<div class="compositeType">
+			<a name="Actor"></a>
+			<h4>Actor</h4>
+			<p></p>
+			<div class="compositeType-fields">
+				
+					<p class="compositeType-field">
+						<span>birthdate</span>
+						
+							<a href="#Time">Time</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>description</span>
+						
+							<a href="#String">String</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>firstName</span>
+						
+							<a href="#String">String</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>gender</span>
+						
+							<a href="#Gender">Gender</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>id</span>
+						
+							<a href="#Identifier">Identifier</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>lastName</span>
+						
+							<a href="#String">String</a>
+						
+					</p>
+				
+			</div>
+		</div>
+	
+		<div class="compositeType">
+			<a name="Movie"></a>
+			<h4>Movie</h4>
+			<p></p>
+			<div class="compositeType-fields">
+				
+					<p class="compositeType-field">
+						<span>description</span>
+						
+							<a href="#String">String</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>duration</span>
+						
+							<a href="#Duration">Duration</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>genre</span>
+						
+							<span>
+								<span class="compositeType-field-listType">List of</span>
+								<a href="#Genre">Genre</a>
+							</span>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>id</span>
+						
+							<a href="#Identifier">Identifier</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>keywords</span>
+						
+							<a href="#String">String</a>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>name</span>
+						
+							<span>
+								<span class="compositeType-field-listType">List of</span>
+								<a href="#String">String</a>
+							</span>
+						
+					</p>
+				
+					<p class="compositeType-field">
+						<span>publication</span>
+						
+							<a href="#Time">Time</a>
+						
+					</p>
+				
+			</div>
+		</div>
+	
+</div>
+
+	</body>
+</html>

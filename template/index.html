@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{ .Doc.Title }} - {{ .Doc.Version }}</title>
+		<meta name="description" content="{{ .Doc.Description }}"/>
+		<meta name="author" content="{{ .Doc.Author }}" />
+		<meta name="date" content="{{ .Build }}">
+		<meta name="generator" content="{{ .RendererVersion }}">
+		<style>
+			html {
+				width: 100%;
+				min-height: 100%;
+				background-color: #eee;
+			}
+			body {
+				width: 768px;
+				height: 100%;
+				margin: auto;
+				background-color: #fff;
+				padding: 64px;
+				font-family: sans-serif;
+			}
+
+			a {
+				color: #2196f3;
+				text-decoration: none;
+				transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+				text-shadow:
+					0px -2px 0 inherit, 0px -1px 0 inherit, 0px 0px 0 inherit,
+					2px -2px 0 inherit, 2px -1px 0 inherit, 2px 0px 0 inherit,
+					-2px -2px 0 inherit, -2px -1px 0 inherit, -2px 0px 0 inherit,
+					1px -2px 0 inherit, 1px -1px 0 inherit, 1px 0px 0 inherit,
+					-1px -2px 0 inherit, -1px -1px 0 inherit, -1px 0px 0 inherit,
+					0px -2px 0 inherit, 0px -1px 0 inherit, 0px 0px 0 inherit;
+				box-shadow:
+					0 -1px 0 0 inherit inset,
+					0 -2px 0 0 transparent inset;
+			}
+
+			a:hover {
+				box-shadow:
+					0 -1px 0 0 inherit inset,
+					0 -2px 0 0 #2196f3 inset;
+			}
+
+			a::selection {
+				color: inherit;
+				background: #2196f3;
+				text-shadow: none;
+			}
+
+			#table-of-contents {
+				margin-top: 4rem;
+				margin-bottom: 4rem;
+			}
+			#table-of-contents li {
+				padding: .2rem;
+			}
+
+			.section-heading {
+				border-bottom: 1px solid #eee;
+				padding-bottom: .5rem;
+			}
+
+			.compositeType-field-listType {
+				color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Document Header -->
+		<div id="header">
+			<h1>{{ .Doc.Title }}</h1>
+			<table>
+				<tbody>
+					<tr>
+						<td>Author</td>
+						<td>{{ .Doc.Author }}</td>
+					</tr>
+					<tr>
+						<td>Version:</td>
+						<td>{{ .Doc.Version }}</td>
+					</tr>
+					<tr>
+						<td>Build:</td>
+						<td>{{ .Build }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Table of Contents -->
+		{{ template "table-of-contents.html" . }}
+
+		<!-- Scalar Types -->
+		{{ template "scalar-types.html" . }}
+
+		<!-- Enumeration Types -->
+		{{ template "enumeration-types.html" . }}
+
+		<!-- Composite Types -->
+		{{ template "composite-types.html" . }}
+	</body>
+</html>

@@ -1,0 +1,12 @@
+<div id="enumeration-types">
+	<a name="enumeration-types"></a>
+	<h2 class="section-heading">Enumeration Types</h2>
+
+	{{ range $typeName, $type := .Doc.EnumerationTypes }}
+		<div class="enumeration-type">
+			<a name="{{ $typeName }}"></a>
+			<h3>{{ $typeName }}</h3>
+			<p class="description">{{ $type.Description }}</p>
+		</div>
+	{{ end }}
+</div>

@@ -1,0 +1,80 @@
+title: Movie Theater
+author: Roman Sharkov
+version: 1.0.0
+description: >
+  This document describes the schema of a movie theater type system
+  consisting of scalar-, enumeration- and composite types
+  as well as type relations.
+
+scalar types:
+  Time:
+    descr: "Represents an RFC3339 encoded UTC datetime"
+  Duration:
+    descr: "Represents a time span in seconds"
+  Identifier:
+  EmailAddress:
+    descr: >
+      Represents an email address according to the `^.+@.+\..+$` pattern.
+
+enumeration types:
+  Gender:
+    descr: >
+      Represents a gender enumration type
+    values:
+      Male: 1
+      Female: 2
+  Genre:
+    values:
+      Action: 1
+      Adventure: 2
+      Comedy: 3
+      Crime: 4
+      Drama: 5
+      Fantasy: 6
+      Historical: 7
+      Horror: 8
+      Mystery: 9
+      Philosophical: 10
+      Political: 11
+      Romance: 12
+      Saga: 13
+      Satire: 14
+      Science fiction: 15
+      Thriller: 16
+      Western: 17
+
+composite types:
+  Actor:
+    meta:
+      id:
+        type: Identifier
+      description:
+        type: String
+        nullable: true
+      firstName:
+        type: String
+      lastName:
+        type: String
+      gender:
+        type: Gender
+      birthdate:
+        type: Time
+        nullable: true
+    relations:
+  Movie:
+    meta:
+      name:
+        type: List <String>
+      description:
+        type: String
+        nullable: true
+      genre:
+        type: List <Genre>
+      keywords:
+        type: String
+      id:
+        type: Identifier
+      publication:
+        type: Time
+      duration:
+        type: Duration
