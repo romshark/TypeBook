@@ -1,4 +1,4 @@
-package doc
+package document
 
 type ScalarType struct {
 	Description string `yaml:"descr"`

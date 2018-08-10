@@ -1,13 +1,14 @@
 package rend
 
 import (
-	"docbuilder/doc"
 	"fmt"
 	"time"
+
+	"github.com/romshark/TypeBook/document"
 )
 
 type Model struct {
-	Doc             *doc.Document
+	Doc             *document.Document
 	Registry        Registry
 	Build           string
 	RendererVersion string
@@ -17,10 +18,10 @@ type Model struct {
 // Redeclaration of predefined types is checked.
 // References to undefined types are checked
 func NewModel(
-	document *doc.Document,
+	doc *document.Document,
 	options *ModelInitOptions,
 ) (*Model, []string, *ModelInitStats, error) {
-	if document == nil {
+	if doc == nil {
 		return nil, nil, nil, fmt.Errorf("Missing document template")
 	}
 
@@ -30,21 +31,21 @@ func NewModel(
 
 	// Determine predefined types
 	//TODO: make predefined types configurable
-	predefinedScalarTypes := map[string]doc.ScalarType{
-		"Bool": doc.ScalarType{
+	predefinedScalarTypes := map[string]document.ScalarType{
+		"Bool": document.ScalarType{
 			Description: "Boolean value that's either true or false",
 		},
-		"Number": doc.ScalarType{
+		"Number": document.ScalarType{
 			Description: "A signed floating point number",
 		},
-		"String": doc.ScalarType{
+		"String": document.ScalarType{
 			Description: "A UTF8 encoded text value",
 		},
 	}
 
 	// Create a document model instance
 	model := &Model{
-		Doc:             document,
+		Doc:             doc,
 		Build:           time.Now().UTC().Format(time.RFC3339),
 		RendererVersion: rendererVersion,
 		Registry: Registry{
@@ -52,9 +53,9 @@ func NewModel(
 			Types: make(
 				map[string]interface{},
 				len(predefinedScalarTypes)+
-					len(document.ScalarTypes)+
-					len(document.EnumerationTypes)+
-					len(document.CompositeTypes),
+					len(doc.ScalarTypes)+
+					len(doc.EnumerationTypes)+
+					len(doc.CompositeTypes),
 			),
 		},
 	}
@@ -66,7 +67,7 @@ func NewModel(
 
 	if err := model.Registry.build(
 		addError,
-		document,
+		doc,
 		predefinedScalarTypes,
 	); err != nil {
 		return nil, nil, nil, fmt.Errorf("Couldn't build registry: %s", err)
@@ -74,7 +75,7 @@ func NewModel(
 
 	// Verify null references, ensure that all referenced objects exist
 	if options.CheckReferences {
-		for typeName, compositeType := range document.CompositeTypes {
+		for typeName, compositeType := range doc.CompositeTypes {
 			for fieldName, field := range compositeType.Metadata {
 				_, exists := model.Registry.Types[field.Type.Name]
 				if !exists {

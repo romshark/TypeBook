@@ -1,9 +1,10 @@
 package rend
 
 import (
-	"docbuilder/doc"
 	"fmt"
 	"reflect"
+
+	"github.com/romshark/TypeBook/document"
 )
 
 type TypeCategory int
@@ -17,7 +18,7 @@ const (
 
 type Registry struct {
 	Types                 map[string]interface{}
-	PredefinedScalarTypes map[string]doc.ScalarType
+	PredefinedScalarTypes map[string]document.ScalarType
 	PredefinedTypes       map[string]interface{}
 
 	TotalScalarTypes      uint32
@@ -29,8 +30,8 @@ type Registry struct {
 // build builds the registry verifying that predefined types are not redeclared
 func (r *Registry) build(
 	addError func(format string, a ...interface{}),
-	document *doc.Document,
-	predefinedScalarTypes map[string]doc.ScalarType,
+	doc *document.Document,
+	predefinedScalarTypes map[string]document.ScalarType,
 ) error {
 	// Register predefined types
 	r.PredefinedTypes = make(
@@ -57,21 +58,21 @@ func (r *Registry) build(
 		// Check whether redaclaring an already defined user type
 		if meta, isDeclared := r.Types[typeName]; isDeclared {
 			switch meta.(type) {
-			case *doc.ScalarType:
+			case *document.ScalarType:
 				addError(fmt.Sprintf(
 					"Redeclaration of type '%s' "+
 						"('%s' is declared scalar type)",
 					typeName,
 					typeName,
 				))
-			case *doc.EnumType:
+			case *document.EnumType:
 				addError(fmt.Sprintf(
 					"Redeclaration of type '%s' "+
 						"('%s' is declared enumeration type)",
 					typeName,
 					typeName,
 				))
-			case *doc.CompositeType:
+			case *document.CompositeType:
 				addError(fmt.Sprintf(
 					"Redeclaration of type '%s' "+
 						"('%s' is declared composite type)",
@@ -90,19 +91,19 @@ func (r *Registry) build(
 	}
 
 	// Check for redeclaration of predefined types
-	for typeName, meta := range document.ScalarTypes {
+	for typeName, meta := range doc.ScalarTypes {
 		if err := checkRedeclaration(typeName); err != nil {
 			return err
 		}
 		r.Types[typeName] = &meta
 	}
-	for typeName, meta := range document.EnumerationTypes {
+	for typeName, meta := range doc.EnumerationTypes {
 		if err := checkRedeclaration(typeName); err != nil {
 			return err
 		}
 		r.Types[typeName] = &meta
 	}
-	for typeName, meta := range document.CompositeTypes {
+	for typeName, meta := range doc.CompositeTypes {
 		if err := checkRedeclaration(typeName); err != nil {
 			return err
 		}
@@ -111,10 +112,10 @@ func (r *Registry) build(
 
 	// Count the types
 	r.TotalScalarTypes = uint32(
-		len(predefinedScalarTypes) + len(document.ScalarTypes),
+		len(predefinedScalarTypes) + len(doc.ScalarTypes),
 	)
-	r.TotalEnumerationTypes = uint32(len(document.EnumerationTypes))
-	r.TotalCompositeTypes = uint32(len(document.CompositeTypes))
+	r.TotalEnumerationTypes = uint32(len(doc.EnumerationTypes))
+	r.TotalCompositeTypes = uint32(len(doc.CompositeTypes))
 	r.TotalTypes = r.TotalScalarTypes +
 		r.TotalEnumerationTypes +
 		r.TotalCompositeTypes

@@ -2,14 +2,15 @@ package main
 
 import (
 	"bytes"
-	"docbuilder/doc"
-	"docbuilder/rend"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"time"
+
+	"github.com/romshark/TypeBook/document"
+	"github.com/romshark/TypeBook/rend"
 )
 
 var inputFilePath = flag.String(
@@ -34,7 +35,7 @@ func main() {
 		log.Fatalf("Couldn't initialize renderer: %s", err)
 	}
 
-	document, docParsingStats, err := doc.NewFromFile(*inputFilePath)
+	document, docParsingStats, err := document.NewFromFile(*inputFilePath)
 	if err != nil {
 		log.Fatalf("Couldn't read document: %s", err)
 	}
