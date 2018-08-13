@@ -41,20 +41,22 @@ func main() {
 	}
 
 	// Create document model
-	documentModel, errorMessages, _, err := rend.NewModel(
-		document,
-		&rend.ModelInitOptions{
-			CheckReferences: true,
-		},
-	)
+	documentModel, errs, _, err := rend.NewModel(document)
 	if err != nil {
 		log.Fatalf("Couldn't initialize document model: %s", err)
 	}
 
-	if len(errorMessages) > 0 {
-		fmt.Printf("%d errors:\n", len(errorMessages))
-		for i, errMsg := range errorMessages {
-			fmt.Printf(" %d: %s\n", i, errMsg)
+	// Print errors if any
+	if len(errs) > 0 {
+		fmt.Printf("%d errors:\n", len(errs))
+		for i, err := range errs {
+			fmt.Printf(
+				" %d (%s): %s in %s\n",
+				i,
+				err.Code,
+				err.Message,
+				err.Location,
+			)
 		}
 		os.Exit(1)
 	}

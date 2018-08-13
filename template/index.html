@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{{ .Doc.Title }} - {{ .Doc.Version }}</title>
-		<meta name="description" content="{{ .Doc.Description }}"/>
-		<meta name="author" content="{{ .Doc.Author }}" />
-		<meta name="date" content="{{ .Build }}">
-		<meta name="generator" content="{{ .RendererVersion }}">
+		<title>{{ .Metadata.Title }} - {{ .Metadata.Version }}</title>
+		<meta name="description" content="{{ .Metadata.Description }}"/>
+		<meta name="author" content="{{ .Metadata.Author }}" />
+		<meta name="date" content="{{ .Metadata.Build }}">
+		<meta name="generator" content="{{ .Metadata.RendererVersion }}">
 		<style>
 			html {
 				width: 100%;
@@ -24,31 +24,26 @@
 			}
 
 			a {
-				color: #2196f3;
 				text-decoration: none;
-				transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-				text-shadow:
-					0px -2px 0 inherit, 0px -1px 0 inherit, 0px 0px 0 inherit,
-					2px -2px 0 inherit, 2px -1px 0 inherit, 2px 0px 0 inherit,
-					-2px -2px 0 inherit, -2px -1px 0 inherit, -2px 0px 0 inherit,
-					1px -2px 0 inherit, 1px -1px 0 inherit, 1px 0px 0 inherit,
-					-1px -2px 0 inherit, -1px -1px 0 inherit, -1px 0px 0 inherit,
-					0px -2px 0 inherit, 0px -1px 0 inherit, 0px 0px 0 inherit;
-				box-shadow:
-					0 -1px 0 0 inherit inset,
-					0 -2px 0 0 transparent inset;
+				color: #1e88e5;
 			}
 
-			a:hover {
-				box-shadow:
-					0 -1px 0 0 inherit inset,
-					0 -2px 0 0 #2196f3 inset;
+			table {
+				border-collapse: collapse;
 			}
 
-			a::selection {
-				color: inherit;
-				background: #2196f3;
-				text-shadow: none;
+			table td, table th {
+				padding: .5rem;
+				padding-left: 1rem;
+				padding-right: 1rem;
+				border: 1px solid #ddd;
+				text-align: left;
+				vertical-align:top;
+			}
+
+			table thead td {
+				font-weight: bold;
+				color: #aaa;
 			}
 
 			#table-of-contents {
@@ -56,7 +51,7 @@
 				margin-bottom: 4rem;
 			}
 			#table-of-contents li {
-				padding: .2rem;
+				padding: .25rem;
 			}
 
 			.section-heading {
@@ -72,20 +67,20 @@
 	<body>
 		<!-- Document Header -->
 		<div id="header">
-			<h1>{{ .Doc.Title }}</h1>
+			<h1>{{ .Metadata.Title }}</h1>
 			<table>
 				<tbody>
 					<tr>
 						<td>Author</td>
-						<td>{{ .Doc.Author }}</td>
+						<td>{{ .Metadata.Author }}</td>
 					</tr>
 					<tr>
 						<td>Version:</td>
-						<td>{{ .Doc.Version }}</td>
+						<td>{{ .Metadata.Version }}</td>
 					</tr>
 					<tr>
 						<td>Build:</td>
-						<td>{{ .Build }}</td>
+						<td>{{ .Metadata.Build }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -102,5 +97,8 @@
 
 		<!-- Composite Types -->
 		{{ template "composite-types.html" . }}
+
+		<!-- Entity Types -->
+		{{ template "entity-types.html" . }}
 	</body>
 </html>

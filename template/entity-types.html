@@ -1,0 +1,99 @@
+<div id="entity-types">
+	<a name="entity-types"></a>
+	<h2 class="section-heading">Entity Types</h2>
+
+	{{ range $typeName, $entity := .EntityTypes }}
+	<div class="entityType">
+		<a name="{{ $typeName }}"></a>
+		<h4>{{ $typeName }}</h4>
+		<p>{{ $entity.Description }}</p>
+		<div class="entityType-fields">
+			<h5>Metadata</h5>
+			<table>
+				<thead>
+					<tr>
+						<td>Field Name</td>
+						<td>Type</td>
+					</tr>
+				</thead>
+				<tbody>
+					{{ range $fieldName, $field := $entity.Metadata }}
+					<tr>
+						<td class="entityType-field">
+							<span>{{ $fieldName }}</span>
+						</td>
+						<td>
+							{{ if $field.IsList }}
+							<span>
+								<span class="entityType-field-listType">List of</span>
+								<a href="#{{ $field.Type.Name }}">{{ $field.Type.Name }}</a>
+							</span>
+							{{ else }}
+							<a href="#{{ $field.Type.Name }}">{{ $field.Type.Name }}</a>
+							{{ end }}
+						</td>
+					</tr>
+					{{ end }}
+				</tbody>
+			</table>
+		</div>
+		<div class="entityType-relations">
+			<h5>Relations</h5>
+			<table>
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Type</td>
+						<td>Direction</td>
+						<td>Related Type</td>
+					</tr>
+				</thead>
+				<tbody>
+					{{ range $relationName, $relation := $entity.Relations }}
+					<tr>
+						<td class="entityType-field">
+							<span>{{ $relationName }}</span>
+						</td>
+						<td>
+							<a href="#{{ $relation.TypeName }}">
+								{{ $relation.TypeName }}
+							</a>
+						</td>
+						<td>
+							<span>{{ $relation.Direction }}</span>
+							<br>
+							{{ if $relation.Direction }}
+							<span>
+								<a href="#{{ $relation.TargetType.Name }}">
+									{{ $relation.TargetType.Name }}
+								</a>
+								← [{{ $relation.TypeName.RelationType }}] -
+								<a href="#{{ $relation.SourceType.Name }}">
+									{{ $relation.SourceType.Name }}
+								</a>
+							</span>
+							{{ else }}
+							<span>
+								<a href="#{{ $relation.SourceType.Name }}">
+									{{ $relation.SourceType.Name }}
+								</a>
+								- [{{ $relation.TypeName.RelationType }}] →
+								<a href="#{{ $relation.TargetType.Name }}">
+									{{ $relation.TargetType.Name }}
+								</a>
+							</span>
+							{{ end }}
+						</td>
+						<td>
+							<a href="#{{ $relation.RelatedType.Name }}">
+								{{ $relation.RelatedType.Name }}
+							</a>
+						</td>
+					</tr>
+					{{ end }}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{{ end }}
+</div>

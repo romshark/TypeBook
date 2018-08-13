@@ -31,7 +31,7 @@ func (d *DataType) FromBytes(buf []byte) error {
 		d.IsList = false
 		return nil
 	}
-	return fmt.Errorf("Invalid data type: '%s'", string(buf))
+	return fmt.Errorf("invalid data type: '%s'", string(buf))
 }
 
 func (d *DataType) FromString(str string) error {
@@ -39,15 +39,15 @@ func (d *DataType) FromString(str string) error {
 }
 
 // UnmarshalJSON implements the Go JSON interface
-func (dt *DataType) UnmarshalJSON(buf []byte) error {
-	return dt.FromBytes(buf)
+func (d *DataType) UnmarshalJSON(buf []byte) error {
+	return d.FromBytes(buf)
 }
 
 // UnmarshalYAML implements the go-YAML interface
-func (dt *DataType) UnmarshalYAML(unmarshal func(interface{}) error) error {
+func (d *DataType) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var val string
 	if err := unmarshal(&val); err != nil {
 		return err
 	}
-	return dt.FromString(val)
+	return d.FromString(val)
 }

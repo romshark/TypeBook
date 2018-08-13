@@ -7,19 +7,25 @@ description: >
   as well as type relations.
 
 scalar types:
+  Bool:
+    description: "Boolean value that's either true or false"
+  Number:
+    description: "A signed floating point number"
+  String:
+    description: "A UTF8 encoded text value"
   Time:
-    descr: "Represents an RFC3339 encoded UTC datetime"
+    description: "Represents an RFC3339 encoded UTC datetime"
   Duration:
-    descr: "Represents a time span in seconds"
+    description: "Represents a time span in seconds"
   Identifier:
   EmailAddress:
-    descr: >
+    description: >
       Represents an email address according to the `^.+@.+\..+$` pattern.
 
 enumeration types:
   Gender:
-    descr: >
-      Represents a gender enumration type
+    description: >
+      Represents a gender enumeration type
     values:
       Male: 1
       Female: 2
@@ -44,6 +50,22 @@ enumeration types:
       Western: 17
 
 composite types:
+  SocialLinks:
+    meta:
+      facebook:
+        type: String
+        nullable: true
+      twitter:
+        type: String
+        nullable: true
+      instagram:
+        type: String
+        nullable: true
+      googlePlus:
+        type: String
+        nullable: true
+
+entity types:
   Actor:
     meta:
       id:
@@ -60,9 +82,17 @@ composite types:
       birthdate:
         type: Time
         nullable: true
+      social:
+        type: SocialLinks
     relations:
+      movies:
+        type: ActedIn
+        direction: outbound
+        related type: Movie
   Movie:
     meta:
+      id:
+        type: Identifier
       name:
         type: List <String>
       description:
@@ -70,11 +100,12 @@ composite types:
         nullable: true
       genre:
         type: List <Genre>
-      keywords:
-        type: String
-      id:
-        type: Identifier
       publication:
         type: Time
       duration:
         type: Duration
+    relations:
+      actors:
+        type: ActedIn
+        direction: inbound
+        related type: Actor

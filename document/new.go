@@ -13,7 +13,7 @@ func NewFromFile(inputFilePath string) (doc *Document, stats *Stats, err error) 
 	// Read file
 	fileContents, err := ioutil.ReadFile(inputFilePath)
 	if err != nil {
-		return nil, nil, fmt.Errorf("Couldn't read file: %s", err)
+		return nil, nil, fmt.Errorf("couldn't read file: %s", err)
 	}
 	return New(fileContents)
 }
@@ -25,7 +25,7 @@ func New(buf []byte) (doc *Document, stats *Stats, err error) {
 	// Unmarshal YAML
 	startParsingInputFile := time.Now()
 	if err := yaml.Unmarshal(buf, doc); err != nil {
-		return nil, nil, fmt.Errorf("Couldn't parse file: %s", err)
+		return nil, nil, fmt.Errorf("couldn't parse file: %s", err)
 	}
 	parsingInputFileDur := time.Since(startParsingInputFile)
 

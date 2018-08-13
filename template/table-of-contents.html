@@ -2,30 +2,39 @@
 	<b>Table of contents</b>
 	<ul>
 		<!-- Scalar Types -->
-		<li><a href="#scalar-types">Scalar Types ({{ .Registry.TotalScalarTypes }})</a></li>
-		<ul>
-			{{ range $typeName, $type := .Registry.PredefinedScalarTypes }}
-				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
-			{{ end }}
-			{{ range $typeName, $type := .Doc.ScalarTypes }}
-				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
-			{{ end }}
-		</ul>
+		<li><a href="#scalar-types">Scalar Types ({{ .TotalScalarTypes }})</a>
+			<ul>
+				{{ range $typeName, $type := .ScalarTypes }}
+					<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+				{{ end }}
+			</ul>
+		</li>
 
 		<!-- Enumeration Types -->
-		<li><a href="#enumeration-types">Enumeration Types ({{ .Registry.TotalEnumerationTypes }})</a></li>
-		<ul>
-			{{ range $typeName, $type := .Doc.EnumerationTypes }}
-				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
-			{{ end }}
-		</ul>
+		<li><a href="#enumeration-types">Enumeration Types ({{ .TotalEnumerationTypes }})</a>
+			<ul>
+				{{ range $typeName, $type := .EnumerationTypes }}
+					<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+				{{ end }}
+			</ul>
+		</li>
 
 		<!-- Composite Types -->
-		<li><a href="#composite-types">Composite Types ({{ .Registry.TotalCompositeTypes }})</a></li>
-		<ul>
-			{{ range $typeName, $type := .Doc.CompositeTypes }}
-				<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
-			{{ end }}
-		</ul>
+		<li><a href="#composite-types">Composite Types ({{ .TotalCompositeTypes }})</a>
+			<ul>
+				{{ range $typeName, $type := .CompositeTypes }}
+					<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+				{{ end }}
+			</ul>
+		</li>
+
+		<!-- Entity Types -->
+		<li><a href="#entity-types">Entity Types ({{ .TotalEntityTypes }})</a>
+			<ul>
+				{{ range $typeName, $type := .EntityTypes }}
+					<li><a href="#{{ $typeName }}">{{ $typeName }}</a></li>
+				{{ end }}
+			</ul>
+		</li>
 	</ul>
 </div>

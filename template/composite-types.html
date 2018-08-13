@@ -2,26 +2,41 @@
 	<a name="composite-types"></a>
 	<h2 class="section-heading">Composite Types</h2>
 
-	{{ range $typeName, $type := .Doc.CompositeTypes }}
-		<div class="compositeType">
-			<a name="{{ $typeName }}"></a>
-			<h4>{{ $typeName }}</h4>
-			<p>{{ $type.Description }}</p>
-			<div class="compositeType-fields">
-				{{ range $fieldName, $field := $type.Metadata }}
-					<p class="compositeType-field">
-						<span>{{ $fieldName }}</span>
-						{{ if $field.Type.IsList }}
+	{{ range $typeName, $type := .CompositeTypes }}
+	<div class="compositeType">
+		<a name="{{ $typeName }}"></a>
+		<h4>{{ $typeName }}</h4>
+		<p>{{ $type.Description }}</p>
+		<div class="compositeType-fields">
+			<h5>Fields</h5>
+			<table>
+				<thead>
+					<tr>
+						<td>Field Name</td>
+						<td>Type</td>
+					</tr>
+				</thead>
+				<tbody>
+					{{ range $fieldName, $field := $type.Metadata }}
+					<tr>
+						<td class="compositeType-field">
+							<span>{{ $fieldName }}</span>
+						</td>
+						<td>
+							{{ if $field.IsList }}
 							<span>
 								<span class="compositeType-field-listType">List of</span>
 								<a href="#{{ $field.Type.Name }}">{{ $field.Type.Name }}</a>
 							</span>
-						{{ else }}
-							<a href="#{{ $field.Type }}">{{ $field.Type.Name }}</a>
-						{{ end }}
-					</p>
-				{{ end }}
-			</div>
+							{{ else }}
+							<a href="#{{ $field.Type.Name }}">{{ $field.Type.Name }}</a>
+							{{ end }}
+						</td>
+					</tr>
+					{{ end }}
+				</tbody>
+			</table>
 		</div>
+	</div>
 	{{ end }}
 </div>
